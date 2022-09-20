@@ -1,0 +1,123 @@
+/* Typography */
+
+:root{
+    --theme-orange: #F07C27;
+    --main-gradient-orange: linear-gradient(90deg, var(--theme-orange) 0%, var(--theme-orange) 82.7489%, rgba(240,124,39,0) 100%);
+}
+
+@font-face {
+    font-family: 'Optima';
+    src: url('../fonts/Optima.eot');
+    src: url('../fonts/Optima.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Optima.woff2') format('woff2'),
+        url('../fonts/Optima.woff') format('woff'),
+        url('../fonts/Optima.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Shockwave';
+    src: url('../fonts/ShockwaveRegular.eot');
+    src: url('../fonts/ShockwaveRegular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/ShockwaveRegular.woff2') format('woff2'),
+        url('../fonts/ShockwaveRegular.woff') format('woff'),
+        url('../fonts/ShockwaveRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* style initilize */
+*{
+    margin: 0;
+    padding: 0;
+}
+html,
+body{
+    min-height: 100%;
+}
+h2,h3,h4,h5{
+    font-family: 'Shockwave';
+    font-weight: normal;
+}
+h2{
+    font-size: 4vw;
+}
+.content-wrapper{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding-left: 10%;
+}
+.content-wrapper::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 15%;
+    bottom: 0;
+    z-index: -1;
+    background: var(--theme-orange);
+background: var(--main-gradient-orange);
+}
+
+.right-path{
+    position: absolute;
+    right: 0;
+    height: 100%;
+    z-index: -2;
+}
+
+.white-vector{
+    position: absolute;
+    left: -8%;
+    right: -4%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+
+.white-vector img{
+    width: 100%;
+}
+.right-path img{
+    height: 100%;
+}
+
+.d-flex {
+    display: flex;
+}
+.items-center{
+    align-items: center;
+}
+
+.contents{
+    position: relative;
+    height: 100%;
+    z-index: 3;
+}
+
+.camera-man{
+    width: 23%;
+    align-self: flex-end;
+}
+
+.camera-man img{
+    width: 100%;
+    display: block;
+}
+
+.animated-text{
+    flex-grow: 1;
+    opacity: 0;
+}
+
+.contents span{
+    font-size: 2vw;
+    color: var(--theme-orange);
+    font-family: 'Shockwave';
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film</title>
+    <link rel="stylesheet" href="css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <main class="site-main">
+        <div class="frame-wrapper">
+            <!-- Slider main container -->
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="content-wrapper">
+                            <div class="white-vector">
+                                <img src="./images/first-screen-white-vector-with-dots.png" alt="">
+                            </div>
+                            <div class="right-path">
+                                <img src="./images/first-screen-end-path.png" alt="End path">
+                            </div>
+                            <div class="d-flex items-center contents">
+                                <div class="camera-man">
+                                    <img src="./images/camera-man-vector.png" alt="Camera man">
+                                </div>
+                                <div class="animated-text">
+                                    <span>Do you wanna</span>
+                                    <h2>Make a movie?</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">Slide 2</div>
+                    <div class="swiper-slide">Slide 3</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+    <script type="text/javascript">
+        (function($){
+            $(function(){
+                const swiper = new Swiper('.swiper', {
+                    // Optional parameters
+                    // direction: 'vertical',
+                    loop: false,
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    mousewheel: true,
+                    speed: 4000,
+                    autoplay: {
+                        delay: 5300,
+                        // disableOnInteraction: true,
+                        pauseOnMouseEnter: true,
+                        stopOnLastSlide: true
+                    },
+                });
+
+                function firstSlideAnimation(){
+                    var whiteVactor = $('.white-vector'),
+                        Text = $('.animated-text');
+
+                        TweenMax.fromTo(whiteVactor, 3.5,
+                            {
+                                clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)'
+                            },
+                            {
+                                clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+                                // ease:Power1.easeOut
+                            }
+                        );
+                        TweenMax.fromTo(whiteVactor, .8,{
+                            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+                        },{
+                            clipPath: 'polygon(0px 0px, 100% 0px, 100% 68%, 0px 100%)',
+                            delay: 2.5
+                        });
+                        TweenMax.fromTo(Text, 2,
+                            {
+                                opacity: 0,
+                            },
+                            {
+                                opacity: 1,
+                                delay: 3.8
+                            }
+                        );
+                }
+
+                firstSlideAnimation();
+
+            })
+        })(jQuery)
+    </script>
+</body>
+</html>

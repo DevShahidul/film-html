@@ -130,24 +130,24 @@ h6{
     position: absolute;
     left: 0;
     top: 0;
-    right: 15%;
+    right: 3%;
     bottom: 0;
     z-index: -1;
     background: var(--theme-orange);
-background: var(--main-gradient-orange);
+    background: var(--main-gradient-orange);
 }
 
 .right-path{
     position: absolute;
-    right: 0;
+    right: -8%;
     height: 100%;
     z-index: -2;
 }
 
 .white-vector{
     position: absolute;
-    left: -8%;
-    right: -4%;
+    left: -21%;
+    right: -12%;
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
@@ -184,14 +184,6 @@ background: var(--main-gradient-orange);
     color: var(--theme-orange);
 }
 
-/* .swiper-slide{
-    overflow: hidden;
-}
-
-.swiper-slide.swiper-slide-active{
-    overflow: visible;
-} */
-
 .contents{
     position: relative;
     height: 100%;
@@ -224,6 +216,11 @@ background: var(--main-gradient-orange);
     min-height: 100vh;
 }
 
+.content-text{
+    flex-grow: 1;
+    padding-bottom: 1.5rem;
+}
+
 .animate-on-show{
     flex-grow: 1;
 }
@@ -249,7 +246,8 @@ background: var(--main-gradient-orange);
 .building-vector{
     width: 115%;
     margin-left: -8%;
-    justify-self: flex-end;
+    position: relative;
+    left:12%;
 }
 
 
@@ -410,6 +408,15 @@ background: var(--main-gradient-orange);
     max-width: 580px;
     overflow-wrap: break-word;
     hyphens: auto;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0)
+}
+
+.content-bottom > h4{
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
 }
 
 .heart-wrap{
@@ -418,6 +425,7 @@ background: var(--main-gradient-orange);
     margin-left: auto;
     margin-right: auto;
     margin-top: 2rem;
+    opacity: 0;
 }
 
 .heart-wrap img{
@@ -432,6 +440,10 @@ background: var(--main-gradient-orange);
 
 .social-items{
     margin-top: 1.5rem;
+    -webkit-transform: translateY(4rem);
+    -ms-transform: translateY(4rem);
+    transform: translateY(4rem);
+    opacity: 0;
 }
 
 .social-items a{
@@ -443,6 +455,10 @@ background: var(--main-gradient-orange);
     margin-top: .7rem;
     background-color: var(--theme-black);
     color: var(--theme-white);
+    -webkit-transform: translateY(4rem);
+    -ms-transform: translateY(4rem);
+    transform: translateY(4rem);
+    opacity: 0;
 }
 
 /* Modal style */

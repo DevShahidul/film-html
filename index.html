@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="second-slide-content min-h-screen d-flex justify-center">
+                        <div class="second-slide-content min-h-screen d-flex items-center">
                             <div class="content-text text-center">
                                 <div class="animate-on-show">
                                     <h2>What does long beach <span class="text-orange">MEAN To You?</span></h2>
@@ -107,6 +107,8 @@
         (function($){
             $(function(){
 
+                const gif = './images/THOLB_HeartBeat_FHD.gif';
+
                 $(".btn-signup").on("click", function(){
                     $('#subscribe-modal').fadeIn();
                 });
@@ -137,8 +139,12 @@
                         },
                         slideChange: function(swiper){
                             console.log('slide change');
-                            console.log('*** mySwiper.realIndex', swiper.realIndex);
+                            console.log('realIndex', swiper.realIndex);
+                            if(swiper.realIndex == 0){
+                                resetPathAndBuildingVector();
+                            }
                             if(swiper.realIndex == 1){
+                                movePathAndBuildingVector();
                                 pauseVideoStripe();
                             }
                             if(swiper.realIndex == 2){
@@ -150,8 +156,11 @@
                             }
                         },
                         transitionEnd: function(swiper){
+                            // if(swiper.realIndex == 0){
+                            //     resetPathAndBuildingVector();
+                            // }
                             if(swiper.realIndex == 1){
-                                secondSildeAnimation()
+                                secondSildeAnimation();
                             }
                             if(swiper.realIndex == 2){
                                 thirdScreenAnimation();
@@ -170,9 +179,6 @@
                 // filmSwiper.on('slideChange', function() {
                 //     console.log('slide changed');
                 // });
-
-
-                
 
                 function firstSlideAnimation(){
                     var whiteVactor = $('.white-vector'),
@@ -214,6 +220,42 @@
                         {
                             opacity: 1,
                             delay: .8
+                        }
+                    );
+                }
+
+                function movePathAndBuildingVector(){
+                    TweenMax.to('.right-path', 2, {
+                        right: 0
+                    });
+                    TweenMax.to('.building-vector', 2, {
+                        left: 0
+                    });
+                    TweenMax.fromTo('.white-vector', 3, 
+                        {
+                            right: '-12%'
+                        },
+                        {
+                            right: '0',
+                            delay: 1
+                        }
+                    );
+                }
+
+                function resetPathAndBuildingVector(){
+                    TweenMax.to('.right-path', 2, {
+                        right: '-8%'
+                    });
+                    TweenMax.to('.building-vector', 2, {
+                        left: '12%'
+                    });
+                    TweenMax.fromTo('.white-vector', 3, 
+                        {
+                            right: 0
+                        },
+                        {
+                            right: '-12%',
+                            // delay: 1
                         }
                     );
                 }
@@ -264,14 +306,48 @@
                 }
 
                 function lastScreenAnimation(){
-                    // TweenMax.fromTo('.left-white-vector', .3, 
-                    //     {
-                    //         lef: 0
-                    //     },
-                    //     {
-                    //         left: '-33rem'
-                    //     }
-                    // )
+                    TweenMax.to('.last-screen > h4', 1,
+                        {
+                            scale: 1.1
+                        }
+                    );
+
+                    TweenMax.to('.last-screen > h4', 1.2,
+                        {
+                            scale: 1,
+                            delay: 0.3
+                        }
+                    );
+ 
+                    TweenMax.to('.heart-wrap', .2, {
+                        opacity: 1,
+                        delay: 0.8
+                    });
+
+                    TweenMax.to('.heart-wrap img', .2,{
+                        src: gif,
+                        delay: 1
+                    });
+
+                    TweenMax.to('.content-bottom > h4', 1,
+                        {
+                            scale: 1.1,
+                            delay: 6
+                        }
+                    );
+
+                    TweenMax.to('.content-bottom > h4', 1.2,
+                        {
+                            scale: 1,
+                            delay: 6.3
+                        }
+                    );
+
+                    TweenMax.to('.social-items, .btn-signup', 1,{
+                        y: 0,
+                        opacity: 1,
+                        delay: 6.6
+                    })
                 }
 
             })

@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="animated-text">
                                     <span class="text-orange">Do you wanna</span>
-                                    <h2>Make a movie?</h2>
+                                    <h1>Make a movie?</h1>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                             <div class="min-h-screen d-flex items-center">
                                 <div class="movie-screen">
                                     <div class="movie-frame">
-                                        <h4>Submit your short <br /> film to our contest</h4>
+                                        <h2>Submit your short <br /> film to our contest</h2>
                                     </div>
                                 </div>
                                 <div class="viewers-gallery">
@@ -62,7 +62,9 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="last-screen min-h-screen d-flex direction-column items-center">
-                            <div class="left-white-vector"></div>
+                            <div class="left-white-vector">
+                                <img src="images/white-vector-horizontal-right.png" alt="White vector">
+                            </div>
                             <h4>For a chance to win prizes and the oportunity to be a part of a feature film</h4>
                             <div class="heart-wrap d-flex justify-center items-center">
                                 <img src="./images/THOLB_HeartBeat_FHD.gif" alt="Tholb heart beat">
@@ -82,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal-wrap">
+        <div class="modal-wrap" id="subscribe-modal">
             <div class="modal-inner d-flex items-center justify-center">
                 <div class="modal-content">
                     <h3>Jom our film community</h3>
@@ -104,7 +106,17 @@
     <script type="text/javascript">
         (function($){
             $(function(){
-                const swiper = new Swiper('.swiper', {
+
+                $(".btn-signup").on("click", function(){
+                    $('#subscribe-modal').fadeIn();
+                });
+                
+                $(".btn-modal-close").on("click", function(e){
+                    e.preventDefault();
+                    $('#subscribe-modal').fadeOut();
+                })
+
+                const filmSwiper = new Swiper('.swiper', {
                     // Optional parameters
                     // direction: 'vertical',
                     loop: false,
@@ -118,11 +130,49 @@
                         pauseOnMouseEnter: true,
                         stopOnLastSlide: true
                     },
+                    on: {
+                        init: function(){
+                            firstSlideAnimation();
+                            console.log('swiper initialized');
+                        },
+                        slideChange: function(swiper){
+                            console.log('slide change');
+                            console.log('*** mySwiper.realIndex', swiper.realIndex);
+                            if(swiper.realIndex == 1){
+                                pauseVideoStripe();
+                            }
+                            if(swiper.realIndex == 2){
+                                whiteVectorReverse();
+                            }
+                            if(swiper.realIndex == 3){
+                                whiteVectorMove();
+                                pauseVideoStripe();
+                            }
+                        },
+                        transitionEnd: function(swiper){
+                            if(swiper.realIndex == 1){
+                                secondSildeAnimation()
+                            }
+                            if(swiper.realIndex == 2){
+                                thirdScreenAnimation();
+                                playVideoStripe();
+                            }
+                            if(swiper.realIndex == 3){
+                                lastScreenAnimation();
+                            }
+                        }
+                    }
                 });
 
+                filmSwiper.on('transitionEnd', function() {
+                    console.log('*** mySwiper.realIndex', filmSwiper.realIndex);
+                });
+                // filmSwiper.on('slideChange', function() {
+                //     console.log('slide changed');
+                // });
 
-                firstSlideAnimation();
-                secondSildeAnimation()
+
+                
 
                 function firstSlideAnimation(){
                     var whiteVactor = $('.white-vector'),
@@ -143,10 +193,7 @@
                             clipPath: 'polygon(0px 0px, 100% 0px, 100% 64%, 0px 100%)',
                             delay: 2.5
                         });
-                        TweenMax.fromTo(Text, 2,
-                            {
-                                opacity: 0,
-                            },
+                        TweenMax.to(Text, 2,
                             {
                                 opacity: 1,
                                 delay: 3.8
@@ -155,33 +202,76 @@
                 }
 
                 function secondSildeAnimation(){
-                    TweenMax.fromTo('.animate-on-show h2', 2,
-                        {
-                            opacity: 0
-                        },
+                    TweenMax.to('.animate-on-show h2', 2,
                         {
                             opacity: 1
                         }
                     );
-                    TweenMax.fromTo('.animate-on-show > span', 2.3,
+                    TweenMax.to('.animate-on-show > span', 3,
+                        // {
+                        //     opacity: 0
+                        // },
                         {
-                            opacity: 0
-                        },
-                        {
-                            opacity: 1
+                            opacity: 1,
+                            delay: .8
                         }
                     );
                 }
 
-                function lastScreenAnimation(){
-                    TweenMax.fromTo('.left-white-vector', .3, 
+                function thirdScreenAnimation(){
+                    TweenMax.to('.movie-screen', 1,
                         {
-                            lef: 0
+                            opacity: 1,
+                            delay: .3
+                        }
+                    );
+                };
+
+                function pauseVideoStripe(){
+                    TweenMax.to('.movie-frame', .3, {
+                        animationPlayState: 'paused'
+                    })
+                }
+
+                function playVideoStripe(){
+                    TweenMax.to('.movie-frame', .3, {
+                        animationPlayState: 'running'
+                    })
+                }
+
+                function whiteVectorMove(){
+                    TweenMax.fromTo('.left-white-vector', 4, 
+                        {
+                            lef: '-7rem'
                         },
                         {
-                            left: '-28rem'
+                            left: '-33rem',
+                            // delay: 1
                         }
                     )
+                }
+
+                function whiteVectorReverse(){
+                    TweenMax.fromTo('.left-white-vector', 4, 
+                        {
+                            lef: '-33rem'
+                        },
+                        {
+                            left: '-7rem',
+                            // delay: 1
+                        }
+                    )
+                }
+
+                function lastScreenAnimation(){
+                    // TweenMax.fromTo('.left-white-vector', .3, 
+                    //     {
+                    //         lef: 0
+                    //     },
+                    //     {
+                    //         left: '-33rem'
+                    //     }
+                    // )
                 }
 
             })

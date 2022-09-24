@@ -24,7 +24,7 @@
                         <div class="white-vector">
                             <img src="./images/white-vector-with-dots.png" alt="">
                         </div>
-                        <div class="right-path">
+                        <div class="right-path desktop-view">
                             <img src="./images/first-screen-end-path.png" alt="End path">
                         </div>
                         <div class="d-flex items-center contents">
@@ -36,6 +36,9 @@
                                 <h1>Make a movie?</h1>
                             </div>
                         </div>
+                        <div class="bottom-path responsive-view">
+                            <img src="./images/first-screen-end-path-rotate.png" alt="End path">
+                        </div>
                     </div>
                 </div>
                 <div class="swiper-slide">
@@ -43,7 +46,7 @@
                         <div class="content-text text-center">
                             <div class="animate-on-show">
                                 <h2>What does long beach <span class="text-orange">MEAN To You?</span></h2>
-                                <span>Become part of filmmaking history</span>
+                                <span class="desktop-view">Become part of filmmaking history</span>
                             </div>
                         </div>
                         <img src="./images/buildings-vector.png" alt="" class="building-vector" />
@@ -51,7 +54,11 @@
                 </div>
                 <div class="swiper-slide">
                     <div class="film-theater">
-                        <div class="theater-white-vector"></div>
+                        <div class="white-vector-vertical responsive-view bg-white-half">
+                            <span class="zoomIn">Become part of filmmaking history</span>
+                            <img src="./images/white-vector-verticalt.png" alt="White vector">
+                        </div>
+                        <div class="theater-white-vector desktop-view"></div>
                         <div class="min-h-screen d-flex items-center">
                             <div class="movie-screen">
                                 <div class="movie-frame">
@@ -67,11 +74,14 @@
                 </div>
                 <div class="swiper-slide">
                     <div class="last-screen min-h-screen d-flex direction-column items-center">
-                        <div class="left-white-vector">
+                        <div class="left-white-vector desktop-view">
                             <div class="black-path"></div>
                             <div class="yellow-path"></div>
                             <div class="left-white-vector-img"></div>
                             <!-- <img src="images/white-vector-horizontal-right.png" alt="White vector"> -->
+                        </div>
+                        <div class="white-vector-vertical responsive-view bg-black-half">
+                            <img src="./images/white-vector-verticalt.png" alt="White vector">
                         </div>
                         <h4>For a chance to win prizes and the oportunity to be a part of a feature film</h4>
                         <div class="heart-wrap d-flex justify-center items-center">
@@ -114,6 +124,8 @@
         (function($){
             $(function(){
 
+                const _window = $(window);
+
                 const gif = './images/THOLB_HeartBeat_FHD.gif';
 
                 $(".btn-signup").on("click", function(){
@@ -143,24 +155,33 @@
                     on: {
                         init: function(){
                             firstSlideAnimation();
-                            console.log('swiper initialized');
+                            // console.log('swiper initialized');
                         },
                         slideChange: function(swiper){
-                            console.log('slide change');
-                            console.log('realIndex', swiper.realIndex);
+                            // console.log('slide change');
+                            // console.log('realIndex', swiper.realIndex);
                             if(swiper.realIndex == 0){
-                                resetPathAndBuildingVector();
+                                if(_window.width() >= 1024){
+                                    resetPathAndBuildingVector();
+                                }
                             }
                             if(swiper.realIndex == 1){
-                                movePathAndBuildingVector();
-                                moveWhiteVector();
                                 pauseVideoStripe();
+                                if(_window.width() >= 1024){
+                                    movePathAndBuildingVector();
+                                    moveWhiteVector();
+                                }
                             }
                             if(swiper.realIndex == 2){
-                                whiteVectorReverse();
+                                animateZoom();
+                                if(_window.width() >= 1024){
+                                    whiteVectorReverse();
+                                }
                             }
                             if(swiper.realIndex == 3){
-                                whiteVectorMove();
+                                if(_window.width() >= 1024){
+                                    whiteVectorMove();
+                                }
                                 pauseVideoStripe();
                             }
                         },
@@ -170,7 +191,9 @@
                             // }
                             if(swiper.realIndex == 1){
                                 secondSildeAnimation();
-                                moveWhiteVectorAfterSlide();
+                                if(_window.width() >= 1024){
+                                    moveWhiteVectorAfterSlide();
+                                }
                             }
                             if(swiper.realIndex == 2){
                                 thirdScreenAnimation();
@@ -188,13 +211,6 @@
                             slidesPerView: 1,
                         }
                     }
-                });
-
-                filmSwiper.on('transitionEnd', function() {
-                    console.log('*** mySwiper.realIndex', filmSwiper.realIndex);
-                });
-                filmSwiper.on('slideChange', function() {
-                    console.log('slide changed');
                 });
 
                 function firstSlideAnimation(){
@@ -237,6 +253,13 @@
                         }
                     );
                 }
+                
+                function animateZoom(){
+                    TweenMax.to('.film-theater .zoomIn', .3, {
+                        animationPlayState: 'running',
+                        delay: 1.5
+                    })
+                }
 
                 function moveWhiteVector(){
                     TweenMax.fromTo('.white-vector', 3, 
@@ -258,7 +281,7 @@
                             right: '20%',
                         }
                     );
-
+                    
                     TweenMax.fromTo('.right-path', 2, 
                         {
                             right: '-13%'

@@ -837,11 +837,14 @@ h6{
     .bottom-path{
         bottom: -10%;
     }
-    .last-screen::after{
-        bottom: -40px;
-    }
     .last-screen{
         padding-bottom: 5rem;
+        position: relative;
+        z-index: 1;
+    }
+    .last-screen::after{
+        bottom: -40px;
+        z-index: -1;
     }
 }
 @media screen and (max-width: 575px) {    

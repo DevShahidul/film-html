@@ -4,7 +4,7 @@
     --theme-orange: #F07C27;
     --theme-white: #FFFFFF;
     --theme-black: #000000;
-    --main-gradient-orange: linear-gradient(90deg, var(--theme-orange) 0%, var(--theme-orange) 82.7489%, rgba(240,124,39,0) 100%);
+    --main-gradient-orange: linear-gradient(0deg, rgba(255,156,86,1) 0%, rgba(255,112,27,1) 100%);
     --heading-1-size: 6.5rem;
     --heading-2-size: 3rem;
     --heading-3-size: 2.5rem;
@@ -14,7 +14,37 @@
     --btn-size: 1rem;
 }
 
-@keyframes film-stripe {
+@-webkit-keyframes textZoom {
+    0%{
+        -webkit-transform: scale(0);
+                transform: scale(0);
+    }
+    85%{
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+    }
+    100%{
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+}
+    
+@keyframes textZoom {
+    0%{
+        -webkit-transform: scale(0);
+                transform: scale(0);
+    }
+    85%{
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+    }
+    100%{
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+}
+
+@-webkit-keyframes film-stripe {
     0%{
         background: rgb(247,238,229);
         background: radial-gradient(circle, rgba(247,238,229,1) 18%, rgba(245,214,182,1) 100%);
@@ -37,6 +67,39 @@
     }
     100%{
         background: rgb(247,238,229);
+        background: radial-gradient(circle, rgba(247,238,229,1) 18%, rgba(172,164,156,1) 100%);
+    }
+}
+
+@keyframes film-stripe {
+    0%{
+        background: rgb(247,238,229);
+        background: -o-radial-gradient(circle, rgba(247,238,229,1) 18%, rgba(245,214,182,1) 100%);
+        background: radial-gradient(circle, rgba(247,238,229,1) 18%, rgba(245,214,182,1) 100%);
+    }
+    20%{
+        background: rgb(255,247,247);
+        background: -o-radial-gradient(circle, rgba(255,247,247,1) 20%, rgba(251,233,220,1) 100%);
+        background: radial-gradient(circle, rgba(255,247,247,1) 20%, rgba(251,233,220,1) 100%);
+    }
+    40%{
+        background: rgb(255,247,247);
+        background: -o-radial-gradient(circle, rgba(255,247,247,1) 20%, rgba(181,176,173,1) 100%);
+        background: radial-gradient(circle, rgba(255,247,247,1) 20%, rgba(181,176,173,1) 100%);
+    }
+    60%{
+        background: rgb(242,241,241);
+        background: -o-radial-gradient(circle, rgba(242,241,241,1) 44%, rgba(226,226,226,1) 100%);
+        background: radial-gradient(circle, rgba(242,241,241,1) 44%, rgba(226,226,226,1) 100%);
+    }
+    80%{
+        background: rgb(255,247,247);
+        background: -o-radial-gradient(circle, rgba(255,247,247,1) 20%, rgba(181,176,173,1) 100%);
+        background: radial-gradient(circle, rgba(255,247,247,1) 20%, rgba(181,176,173,1) 100%);
+    }
+    100%{
+        background: rgb(247,238,229);
+        background: -o-radial-gradient(circle, rgba(247,238,229,1) 18%, rgba(172,164,156,1) 100%);
         background: radial-gradient(circle, rgba(247,238,229,1) 18%, rgba(172,164,156,1) 100%);
     }
 }
@@ -125,12 +188,12 @@ h6{
     width: 100%;
     padding-left: 10%;
 }
-.content-wrapper::before{
-    content: "";
+.slide-bg{
+    /* content: ""; */
     position: absolute;
     left: 0;
     top: 0;
-    right: 3%;
+    right: 0;
     bottom: 0;
     z-index: -1;
     background: var(--theme-orange);
@@ -139,15 +202,15 @@ h6{
 
 .right-path{
     position: absolute;
-    right: -8%;
+    right: -13%;
     height: 100%;
-    z-index: -2;
+    /* z-index: -2; */
 }
 
 .white-vector{
     position: absolute;
     left: -21%;
-    right: -12%;
+    right: -18%;
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
@@ -186,7 +249,7 @@ h6{
 
 .contents{
     position: relative;
-    height: 100%;
+    min-height: 100vh;
     z-index: 3;
 }
 
@@ -244,14 +307,14 @@ h6{
 }
 
 .building-vector{
-    width: 115%;
-    margin-left: -8%;
+    width: 140%;
+    /* margin-left: -8%; */
     position: relative;
-    left:12%;
+    left:16%;
 }
 
 
-.film-theater::before,
+.theater-white-vector,
 /* .film-theater::after, */
 /* .last-screen::before, */
 .last-screen::after{
@@ -263,9 +326,10 @@ h6{
     z-index: 1;
 }
 
-.film-theater::before{
+.theater-white-vector{
     background-image: url(../images/white-vector-horizontal-left.png);
     background-position: center right;
+    background-color: var(--theme-black);
     width: 7rem;
     left: 0;
 }
@@ -359,37 +423,40 @@ h6{
 
 .left-white-vector{
     position: absolute;
-    /* background-image: url(../images/white-vector-horizontal-right.png); */
+    background-image: url(../images/white-vector-horizontal-right.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left -3rem center;
     width: 42rem;
     top: 0;
     bottom: 0;
-    left: -7rem;
+    left: -3rem;
 }
 
-.left-white-vector img{
+.left-white-vector-img{
+    width: 100%;
+    background-image: url(../images/white-vector-horizontal-right.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     height: 100%;
     position: relative;
     z-index: 2;
 }
 
-.left-white-vector::before,
-.left-white-vector::after{
-    content: "";
+.black-path,
+.yellow-path{
     width: 50%;
     position: absolute;
     top: 0;
     bottom: 0;
-    /* z-index: -1; */
 }
 
-.left-white-vector::before{
-    left: 17%;
+.black-path{
+    left: 0%;
     background-color: var(--theme-black);
 }
-.left-white-vector::after{
+.yellow-path{
     right: 0;
     background-color: var(--theme-orange);
 }
@@ -408,15 +475,19 @@ h6{
     max-width: 580px;
     overflow-wrap: break-word;
     hyphens: auto;
-    -webkit-transform: scale(0);
+    /* -webkit-transform: scale(0);
     -ms-transform: scale(0);
-    transform: scale(0)
+    transform: scale(0) */
 }
 
+.last-screen > h4,
 .content-bottom > h4{
-    -webkit-transform: scale(0);
+    animation: textZoom .5s;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+    /* -webkit-transform: scale(0);
     -ms-transform: scale(0);
-    transform: scale(0);
+    transform: scale(0); */
 }
 
 .heart-wrap{
@@ -489,13 +560,13 @@ h6{
     text-align: center;
 }
 
-.modal-content h3{
+.modal-content h4{
     color: var(--theme-orange);
 }
 
 .modal-content p{
     margin-top: 1.5rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 /* Forms tyle */
@@ -506,7 +577,7 @@ h6{
 .field-wrap input{
     border: 1px solid #ededed;
     border-right: 0;
-    height: 2rem;
+    height: 2.5rem;
     padding: .5rem 1rem;
     color: var(--theme-black);
     flex-grow: 1;
@@ -535,4 +606,5 @@ h6{
     margin-top: 0.5rem;
     background: transparent;
     text-decoration: underline;
+    font-size: .85rem;
 }
